@@ -1,25 +1,25 @@
 import { NavLink } from 'react-router-dom';
 import classes from './Navigation.module.css';
-import { useEffect } from 'react';
 import { useContext } from 'react';
 import AppContext from '../store/app-context';
 import { defaultAppState } from '../store/AppProvider';
-
+import { useEffect } from 'react';
 
 
 const Navigation=()=>{
     const ctx=useContext(AppContext);
-    useEffect(()=>{console.log(ctx.username)},[ctx.username]);
+    useEffect(()=>{},[ctx.username,ctx.status]);
     const clickHandler=()=>{
-        if(!ctx.status){
-            return;
-        }
-        else{
+        console.log(ctx.status);
+        if(ctx.status){
             ctx.username=defaultAppState.username;
             ctx.password=defaultAppState.password;
             ctx.status=defaultAppState.status;
             ctx.favorites=defaultAppState.favorites;
             ctx.completed=defaultAppState.completed;
+        }
+        else{
+            console.log(ctx.status);
         }
         return;
     }
@@ -28,7 +28,7 @@ const Navigation=()=>{
             <nav>
                 <ul className={classes.list}>
                     <li>
-                        {ctx.username!=="" && <div className={classes.username}>Hi{" "+ctx.username}!</div>}
+                        <div className={classes.username}>Hi{" "+ctx.username}!</div>
                     </li>
                     <li>
                         <NavLink to="/" className={({isActive})=> isActive ? classes.active:undefined} end>Home</NavLink>

@@ -2,8 +2,9 @@ import Card from "./Card";
 import { useContext } from "react";
 import AppContext from "../store/app-context";
 
-const Home=(props)=>{
+const Home=()=>{
   const ctx=useContext(AppContext);
+  const items=ctx.questions;
   // useEffect(()=>{},[ctx.username]);
     return (
       <>
@@ -13,7 +14,7 @@ const Home=(props)=>{
       <h2>Dynamic Programming</h2>
       <div className="topic">
       <ul>
-      {props.items.map((element)=><li><Card key={element.id} id={element.id} question={element}/></li>)}
+      {items.map((element)=><li><Card key={element.id} id={element.id} question={element}/></li>)}
       </ul>
       </div>
       </div>

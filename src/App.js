@@ -6,12 +6,15 @@ import Favorites from './components/Favorites';
 import RootLayout from './components/RootLayout';
 import AppProvider from './store/AppProvider';
 import { createBrowserRouter,RouterProvider } from "react-router-dom";
-
+import { useContext } from 'react';
+import AppContext from './store/app-context';
 
 
 const App=()=>{
     const [users,setUsers]=useState([]);
-    const [favs,setFavs]=useState([]);
+    const ctx=useContext(AppContext);
+    console.log(ctx.questions);
+    // const [favs,setFavs]=useState([]);
     // const [status,setStatus]=useState(false);
     // const [isTouched,setIsTouched]=useState(false);
     // const [showLogin,setShowLogin]=useState(false);
@@ -39,7 +42,7 @@ const App=()=>{
     const verify=(name,password)=>{
       for(const user of users){
         if(user["username"]===name.trim() && user["password"]===password.trim()){
-          setFavs(user.favorites);
+          // setFavs(user.favorites);
           return true;
         }
       }
@@ -73,7 +76,6 @@ const App=()=>{
           {path:'login', element:<Login onSubmit={verify}/>},
           {path:'signUp', element:<SignUp onSubmit={addUser}/>},
           {path:'favs', element:<Favorites />},
-
         ]
       }
       
