@@ -7,14 +7,7 @@ import RootLayout from './components/RootLayout';
 import AppProvider from './store/AppProvider';
 import { createBrowserRouter,RouterProvider } from "react-router-dom";
 
-const questions=[
-  {title:'Longest Increasing Subsequence',url:'https://leetcode.com/problems/longest-increasing-subsequence/description/',checked:false,id:1,key:1},
-  {title:'Knapsack Problem',url:'https://leetcode.com/problems/partition-equal-subset-sum/description/',checked:true,id:2,key:2},
-  {title:'Matrix chain multiplication',url:'https://www.geeksforgeeks.org/problems/palindromic-patitioning4845/1',checked:false,id:3,key:3},
-  {title:'Climbing Stairs',url:'https://leetcode.com/problems/climbing-stairs/description/',checked:true,id:4,key:4},
-  {title:'Arithmetic Slices II - Subsequence',url:'https://leetcode.com/problems/arithmetic-slices-ii-subsequence/description/?envType=daily-question&envId=2024-01-07',checked:true,id:5}
 
-]
 
 const App=()=>{
     const [users,setUsers]=useState([]);
@@ -76,7 +69,7 @@ const App=()=>{
         path:'/', 
         element:<RootLayout/>, 
         children:[
-          {index:true,path:'', element:<Home items={questions}/>},
+          {index:true,path:'', element:<Home/>},
           {path:'login', element:<Login onSubmit={verify}/>},
           {path:'signUp', element:<SignUp onSubmit={addUser}/>},
           {path:'favs', element:<Favorites />},

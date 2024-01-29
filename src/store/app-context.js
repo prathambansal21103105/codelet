@@ -5,6 +5,7 @@ const AppContext=createContext({
   password:"",
   completed:[],
   favorites:[],
+  questions:[],
   status:false,
   addToCompleted:(item)=>{},
   addToFavorites:(item)=>{},
