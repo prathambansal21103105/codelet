@@ -1,10 +1,23 @@
+import Card from "./Card";
+import { useContext } from "react";
+import AppContext from "../store/app-context";
 
-
-const Home=()=>{
-    
+const Home=(props)=>{
+  const ctx=useContext(AppContext);
+  // useEffect(()=>{},[ctx.username]);
     return (
       <>
-      <h1> Welcome! You are now on home page</h1>
+      <p className="heading"> Welcome{" "+ctx.username} ! You are now on home page</p>
+      <div className="display">
+      <div className='outer'>
+      <h2>Dynamic Programming</h2>
+      <div className="topic">
+      <ul>
+      {props.items.map((element)=><li><Card key={element.id} id={element.id} question={element}/></li>)}
+      </ul>
+      </div>
+      </div>
+      </div>
       </>
     );
   }

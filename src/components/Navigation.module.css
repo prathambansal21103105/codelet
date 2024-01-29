@@ -21,3 +21,8 @@
   color: var(--color-primary-800);
   text-decoration: underline;
 }
+
+.username{
+  color:white;
+  font-weight: bold !important;
+}
