@@ -24,7 +24,7 @@ const Login=(props)=>{
             console.log(ctx.username,ctx.password,ctx.status);
             setName("");
             setPassword("");
-            navigate('/');
+            navigate('/nav');
         }
         else{
             setName("");

@@ -89,3 +89,7 @@ main{
 }
 
 
+#nav:hover{
+  font-size: larger !important;
+  color:rgb(132, 108, 174) !important;
+}

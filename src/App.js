@@ -8,6 +8,7 @@ import AppProvider from './store/AppProvider';
 import { createBrowserRouter,RouterProvider } from "react-router-dom";
 import { useContext } from 'react';
 import AppContext from './store/app-context';
+import Navigation from './components/Navigation';
 
 
 const App=()=>{
@@ -76,6 +77,7 @@ const App=()=>{
           {path:'login', element:<Login onSubmit={verify}/>},
           {path:'signUp', element:<SignUp onSubmit={addUser}/>},
           {path:'favs', element:<Favorites />},
+          {path:'nav',element:<Navigation/>}
         ]
       }
       
