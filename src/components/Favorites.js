@@ -1,11 +1,14 @@
-import Card from "./Card";
+// import Card from "./Card";
 import { useContext } from "react";
 import AppContext from "../store/app-context";
+import Navigation from "./Navigation";
 
 const Favorites=(props)=>{
   const ctx=useContext(AppContext);
     return (
       <>
+      <Navigation/>
+      <main>
       <p className="heading"> Welcome{" "+ctx.username} ! Here you can access your favorites</p>
       <div className="display">
       <div className='outer'>
@@ -17,6 +20,7 @@ const Favorites=(props)=>{
       </div>
       </div>
       </div>
+      </main>
       </>
     );
   }

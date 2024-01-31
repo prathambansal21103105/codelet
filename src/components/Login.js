@@ -2,6 +2,7 @@ import { useState,useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import AppContext from "../store/app-context";
 import classes from './Login.module.css';
+import Navigation from "./Navigation";
 
 const Login=(props)=>{
     const ctx=useContext(AppContext);
@@ -24,7 +25,7 @@ const Login=(props)=>{
             console.log(ctx.username,ctx.password,ctx.status);
             setName("");
             setPassword("");
-            navigate('/nav');
+            navigate('/');
         }
         else{
             setName("");
@@ -35,6 +36,8 @@ const Login=(props)=>{
     }
     return(
         <>
+        <Navigation/>
+        <main>
         <h1>Login</h1>
         <form className={classes.form} onSubmit={submitHandler}>
         <div className={classes['input-group']}>
@@ -53,6 +56,7 @@ const Login=(props)=>{
             <button type="submit" className={classes.button}>login</button>
         </p>
         </form>
+        </main>
         </>
     );
 }

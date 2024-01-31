@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import classes from './SignUp.module.css';
+import Navigation from "./Navigation";
 
 const SignUp=(props)=>{
     const [name,setName]=useState("");
@@ -23,6 +24,8 @@ const SignUp=(props)=>{
     return(
        
          <>
+         <Navigation/>
+         <main>
          <h1>SignUp</h1>
          <form className={classes.form} onSubmit={submitHandler}>
          <div className={classes['input-group']}>
@@ -41,6 +44,7 @@ const SignUp=(props)=>{
              <button type="submit" className={classes.button}>SignUp</button>
          </p>
          </form>
+         </main>
          </>
     );
 }

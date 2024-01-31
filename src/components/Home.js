@@ -1,6 +1,7 @@
 import Card from "./Card";
 import { useContext } from "react";
 import AppContext from "../store/app-context";
+import Navigation from "./Navigation";
 
 const Home=()=>{
   const ctx=useContext(AppContext);
@@ -8,6 +9,8 @@ const Home=()=>{
   // useEffect(()=>{},[ctx.username]);
     return (
       <>
+      <Navigation/>
+      <main>
       <p className="heading"> Welcome{" "+ctx.username} ! You are now on home page</p>
       <div className="display">
       <div className='outer'>
@@ -19,6 +22,7 @@ const Home=()=>{
       </div>
       </div>
       </div>
+      </main>
       </>
     );
   }

@@ -7,14 +7,14 @@ import { defaultAppState } from '../store/AppProvider';
 
 
 const Navigation=()=>{
-    const ctx=useContext(AppContext);
     // useEffect(()=>{},[ctx.username,ctx.status]);
+    const ctx=useContext(AppContext);
     const clickHandler=()=>{
         console.log(ctx.status);
         if(ctx.status){
             ctx.username=defaultAppState.username;
             ctx.password=defaultAppState.password;
-            ctx.status=defaultAppState.status;
+            ctx.status=false;
             ctx.favorites=defaultAppState.favorites;
             ctx.completed=defaultAppState.completed;
         }

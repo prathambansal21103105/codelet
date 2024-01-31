@@ -71,7 +71,7 @@ const App=()=>{
     const router=createBrowserRouter([
       {
         path:'/', 
-        element:<RootLayout/>, 
+        element:<RootLayout />, 
         children:[
           {index:true,path:'', element:<Home/>},
           {path:'login', element:<Login onSubmit={verify}/>},
