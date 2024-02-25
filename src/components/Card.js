@@ -10,7 +10,7 @@ const Card=(props)=>{
         ctx.addToFavorites(props.question);
     }
     const openURL=()=>{
-        window.open(props.question.url);
+        window.open(props.question.link);
     }
     return(
         // <div className={classes.box}>

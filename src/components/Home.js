@@ -1,18 +1,33 @@
-import Card from "./Card";
 import { useContext } from "react";
 import AppContext from "../store/app-context";
 import Navigation from "./Navigation";
+import Tags from "./Tags";
 
-const Home=()=>{
+const Home=({items})=>{
   const ctx=useContext(AppContext);
-  const items=ctx.questions;
+  let taggedQuestions={};
+  for(const question of items){
+    const currTag=question.tag;
+    taggedQuestions[currTag]={};
+  }
+  for(const question of items){
+    const currTag=question.tag;
+    var size = Object.keys(taggedQuestions[currTag]).length;
+    taggedQuestions[currTag][size]=question;
+  }
+  console.log(taggedQuestions);
+  const topics=[];
+  for(const topic in taggedQuestions){
+    topics.push(taggedQuestions[topic]);
+  }
+  // const items=ctx.questions;
   // useEffect(()=>{},[ctx.username]);
     return (
       <>
       <Navigation/>
       <main>
       <p className="heading"> Welcome{" "+ctx.username} ! You are now on home page</p>
-      <div className="display">
+      {/* <div className="display">
       <div className='outer'>
       <h2>Dynamic Programming</h2>
       <div className="topic">
@@ -21,7 +36,8 @@ const Home=()=>{
       </ul>
       </div>
       </div>
-      </div>
+      </div> */}
+      {topics.map((topic)=> <Tags topic={topic}/>)}
       </main>
       </>
     );

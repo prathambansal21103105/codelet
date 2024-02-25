@@ -37,6 +37,9 @@ const Navigation=()=>{
                         <NavLink to="/favs" className={({isActive})=> isActive ? classes.active:undefined} id="nav" end>Favorites</NavLink>
                     </li>
                     <li>
+                        <NavLink to="/Contribute" className={({isActive})=> isActive ? classes.active:undefined} id="nav" end>Contribute</NavLink>
+                    </li>
+                    <li>
                         <NavLink to="/login" className={({isActive})=> isActive ? classes.active:undefined} id="nav" onClick={()=>clickHandler(ctx)} end>{(ctx.status)? 'Logout':'Login'}</NavLink>
                     </li>
                     <li>
