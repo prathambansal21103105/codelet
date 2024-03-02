@@ -11,17 +11,18 @@ import { createBrowserRouter,RouterProvider } from "react-router-dom";
 // import AppContext from './store/app-context';
 // import Navigation from './components/Navigation';
 
-
 const App=()=>{
     const [users,setUsers]=useState([]);
     const [fetchedQuestions,setFetchedQuestions]=useState([]);
     const [user,setUser]=useState("");
     const [loading,setLoading]=useState(false);
-    // const [leetUser,setLeetUser]=useState("");
+    const [leetUser,setLeetUser]=useState("");
     // const [profile,setProfile]=useState([]);
-    // const fetchUserProfie=async(username)=>{
-
-    // }
+    const fetchUserProfie=async(username)=>{
+      const res=await fetch("https://leetcode-stats-api.herokuapp.com/"+username);
+      const resBody=await res.json();
+      return resBody;
+    }
     const fetchUserData=async()=>{
       const res=await fetch("http://localhost:4000/fetchUsers");
       const resBody=await res.json();
@@ -94,13 +95,15 @@ const App=()=>{
       fetchQuestions();
     },[]);
 
-    const verify=(name,password)=>{
+    const verify=async(name,password)=>{
       for(const user of users){
         if(user["username"]===name.trim() && user["password"]===password.trim()){
           setUser(user);
           console.log(user);
-          // setLeetUser(user["leetcodeUsername"]);
-          // const data=fetchUserProfie(user["leetcodeUsername"]);
+          setLeetUser(user["leetcodeUsername"]);
+          const data=await fetchUserProfie(user["leetcodeUsername"]);
+          console.log(data);
+          console.log(data["mediumSolved"]);
           // setProfile((state)=>{
           //   return {...state, leetCode:data};
           // })
