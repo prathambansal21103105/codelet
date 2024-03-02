@@ -15,11 +15,14 @@ import { createBrowserRouter,RouterProvider } from "react-router-dom";
 const App=()=>{
     const [users,setUsers]=useState([]);
     const [fetchedQuestions,setFetchedQuestions]=useState([]);
+    const [user,setUser]=useState("");
     const fetchUserData=async()=>{
       const res=await fetch("http://localhost:4000/fetchUsers");
       const resBody=await res.json();
       const data=resBody.users;
       const usersList=[];
+      console.log("userData:");
+      console.log(data);
       for(const user in data){
         usersList.push(data[user]);
       }
@@ -88,7 +91,7 @@ const App=()=>{
     const verify=(name,password)=>{
       for(const user of users){
         if(user["username"]===name.trim() && user["password"]===password.trim()){
-          // setFavs(user.favorites);
+          setUser(user);
           return true;
         }
       }
@@ -111,7 +114,7 @@ const App=()=>{
     //   return true;
     // }
     const addUser=async(name,password)=>{
-      const data={"username":name.trim(),"password":password.trim(),"favorites":""};
+      const data={"username":name.trim(),"password":password.trim(),"favorites":[]};
       const res=await fetch("http://localhost:4000/create",{
         method:'POST',
         headers: {
@@ -134,17 +137,44 @@ const App=()=>{
       return true;
     }
 
+    const addTofav=async(question)=>{
+      const newList=user["favorites"];
+      for(const fav of newList){
+        if(fav["link"]===question["link"]){
+          console.log("Not Added");
+          return;
+        }
+      }
+      newList.push(question);
+      const data={};
+      data.id=user["id"];
+      data.favs=newList;
+      console.log(data);
+      const res=await fetch("http://localhost:4000/favs",{
+        method:'POST',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body:JSON.stringify(data)
+      })
+      const resBody=await res.json();
+      setUsers(resBody["items"]);
+    }
+
+    const reset=()=>{
+      setUser("");
+    }
 
     const router=createBrowserRouter([
       {
         path:'/', 
         element:<RootLayout />, 
         children:[
-          {index:true,path:'', element:<Home items={fetchedQuestions}/>},
-          {path:'login', element:<Login onSubmit={verify}/>},
-          {path:'signUp', element:<SignUp onSubmit={addUser}/>},
-          {path:'favs', element:<Favorites />},
-          {path:'contribute',element:<Add onSubmit={getQuestion}/>}
+          {index:true,path:'', element:<Home clickHandler={addTofav} items={fetchedQuestions} user={user} reset={reset}/>},
+          {path:'login', element:<Login onSubmit={verify} user={user} reset={reset}/>},
+          {path:'signUp', element:<SignUp onSubmit={addUser} user={user} reset={reset}/>},
+          {path:'favs', element:<Favorites items={user["favorites"]} user={user} reset={reset}/>},
+          {path:'contribute',element:<Add onSubmit={getQuestion} user={user} reset={reset}/>}
         ]
       }
       
@@ -154,7 +184,3 @@ const App=()=>{
 }
 
 export default App;
-
-// new Branch
-
-//branch3

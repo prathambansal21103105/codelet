@@ -24,7 +24,7 @@ const SignUp=(props)=>{
     return(
        
          <>
-         <Navigation/>
+         <Navigation user={props.user} reset={props.reset}/>
          <main>
          <h1>SignUp</h1>
          <form className={classes.form} onSubmit={submitHandler}>

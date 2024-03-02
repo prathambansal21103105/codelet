@@ -2,7 +2,7 @@ import Navigation from './Navigation';
 import classes from './Add.module.css';
 import { useState } from 'react';
 
-const Add=({onSubmit})=>{
+const Add=({onSubmit,user,reset})=>{
     const [title,setTitle]=useState("");
     const [link,setLink]=useState("");
     const [tag,setTag]=useState("");
@@ -25,7 +25,7 @@ const Add=({onSubmit})=>{
     }
     return(
         <>
-         <Navigation/>
+         <Navigation user={user} reset={reset}/>
         <main>
         <h1>Contribute a question</h1>
         <form className={classes.form} onSubmit={submitHandler}>

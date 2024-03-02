@@ -1,10 +1,10 @@
-import { useContext } from "react";
-import AppContext from "../store/app-context";
+// import { useContext } from "react";
+// import AppContext from "../store/app-context";
 import Navigation from "./Navigation";
 import Tags from "./Tags";
 
-const Home=({items})=>{
-  const ctx=useContext(AppContext);
+const Home=({clickHandler,items,user,reset})=>{
+  // const ctx=useContext(AppContext);
   let taggedQuestions={};
   for(const question of items){
     const currTag=question.tag;
@@ -22,11 +22,12 @@ const Home=({items})=>{
   }
   // const items=ctx.questions;
   // useEffect(()=>{},[ctx.username]);
+  const name=(user["username"])? user["username"]:"";
     return (
       <>
-      <Navigation/>
+      <Navigation user={user} reset={reset}/>
       <main>
-      <p className="heading"> Welcome{" "+ctx.username} ! You are now on home page</p>
+      <p className="heading"> Welcome{" "+name} ! You are now on home page</p>
       {/* <div className="display">
       <div className='outer'>
       <h2>Dynamic Programming</h2>
@@ -37,7 +38,7 @@ const Home=({items})=>{
       </div>
       </div>
       </div> */}
-      {topics.map((topic)=> <Tags topic={topic}/>)}
+      {topics.map((topic)=> <Tags clickHandler={clickHandler} topic={topic} user={user}/>)}
       </main>
       </>
     );

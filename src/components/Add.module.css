@@ -3,8 +3,9 @@
     max-width: 25rem;
     margin: 2rem auto;
     border-radius: 4px;
-    background: linear-gradient(180deg, #f2f4f4, #1e0419);
-    color:black;
+    /* background: linear-gradient(180deg, #f2f4f4, rgb(21, 17, 9)); */
+    background:black;
+    /* color:black; */
   }
   
   .input-group {
@@ -20,7 +21,7 @@
     font-size: 0.75rem;
     font-weight: bold;
     text-transform: uppercase;
-    color: #0b0c0c, !important;
+    color: #ffffff, !important;
   }
   
   .form input {
@@ -28,8 +29,8 @@
     padding: 0.5rem;
     border: 1px solid #575858;
     border-radius: 0.25rem;
-    background-color: black;
-    color: white;
+    background-color: rgb(248, 245, 245);
+    color: rgb(0, 0, 0);
     font-size: 1rem;
     font-weight:bold;
   }
@@ -44,8 +45,9 @@
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 0.25rem;
-    background: linear-gradient(180deg, #1f1f1f, #030303);
-    color: #f0f9f7;
+    /* background: linear-gradient(180deg, #1f1f1f, #030303); */
+    background: white;
+    color: #000000;
     font-family: 'Roboto Condensed', sans-serif;
     cursor: pointer;
   }
@@ -62,16 +64,16 @@
     background: linear-gradient(180deg, #4a4b4b00, #585858);
     border: black;
     border-width: 1rem;
-    color:black;
+    color:rgb(255, 253, 253);
   }
   
   .buttonAlt:hover {
     background: transparent;
-    color: #a2a7a6;
+    color: #000000;
   }
 
   ::placeholder{
-    color:rgb(174, 174, 174)!important;
+    color:rgb(7, 7, 7)!important;
     font-size: small;
     font-weight: bold;
   }

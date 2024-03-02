@@ -1,11 +1,12 @@
-import { useState,useContext } from "react";
+// import { useState,useContext } from "react";
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AppContext from "../store/app-context";
+// import AppContext from "../store/app-context";
 import classes from './Login.module.css';
 import Navigation from "./Navigation";
 
 const Login=(props)=>{
-    const ctx=useContext(AppContext);
+    // const ctx=useContext(AppContext);
     const [name,setName]=useState("");
     const [password,setPassword]=useState("");
     const navigate=useNavigate();
@@ -19,10 +20,10 @@ const Login=(props)=>{
         event.preventDefault();
         if(props.onSubmit(name,password)){
             console.log("yes");
-            ctx.username=name;
-            ctx.password=password;
-            ctx.status=true;
-            console.log(ctx.username,ctx.password,ctx.status);
+            // ctx.username=name;
+            // ctx.password=password;
+            // ctx.status=true;
+            // console.log(ctx.username,ctx.password,ctx.status);
             setName("");
             setPassword("");
             navigate('/');
@@ -36,7 +37,7 @@ const Login=(props)=>{
     }
     return(
         <>
-        <Navigation/>
+        <Navigation user={props.user} reset={props.reset}/>
         <main>
         <h1>Login</h1>
         <form className={classes.form} onSubmit={submitHandler}>

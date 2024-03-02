@@ -1,13 +1,17 @@
 import classes from './Card.module.css';
-import { useState,useContext } from 'react';
-import AppContext from '../store/app-context';
+import { useState } from 'react';
+// import { useState,useContext } from 'react';
+// import AppContext from '../store/app-context';
 
 const Card=(props)=>{
     const [clicked,setClicked]=useState(false);
-    const ctx=useContext(AppContext);
-    const addHandler=()=>{
+    // const ctx=useContext(AppContext);
+    const addHandler=(event)=>{
+        event.preventDefault();
+        if(!clicked){
+            props.clickHandler(props.question);
+        }
         setClicked((state)=>!state);
-        ctx.addToFavorites(props.question);
     }
     const openURL=()=>{
         window.open(props.question.link);
@@ -15,7 +19,7 @@ const Card=(props)=>{
     return(
         // <div className={classes.box}>
         <>
-            {/* <button className={classes.star} onClick={addHandler}>{(!clicked)? '✅':'❌'}</button> */}
+            {props.user!=="" && <button className={classes.star} onClick={addHandler}>{(!clicked)? '➕':'➖'}</button>}
             <button className={classes.question} onClick={openURL}>{props.question.title}</button>
         </>
         // {/* </div> */}
