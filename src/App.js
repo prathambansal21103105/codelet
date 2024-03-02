@@ -19,7 +19,15 @@ const App=()=>{
     const [leetUser,setLeetUser]=useState("");
     // const [profile,setProfile]=useState([]);
     const fetchUserProfie=async(username)=>{
-      const res=await fetch("https://leetcode-stats-api.herokuapp.com/"+username);
+      // const res=await fetch("https://leetcode-stats-api.herokuapp.com/"+username);
+      const data={username};
+      const res=await fetch("http://localhost:4000/fetchUserProfile",{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json",
+        },
+        body:JSON.stringify(data)
+      })
       const resBody=await res.json();
       return resBody;
     }
@@ -103,7 +111,6 @@ const App=()=>{
           setLeetUser(user["leetcodeUsername"]);
           const data=await fetchUserProfie(user["leetcodeUsername"]);
           console.log(data);
-          console.log(data["mediumSolved"]);
           // setProfile((state)=>{
           //   return {...state, leetCode:data};
           // })
