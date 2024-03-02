@@ -16,6 +16,12 @@ const App=()=>{
     const [users,setUsers]=useState([]);
     const [fetchedQuestions,setFetchedQuestions]=useState([]);
     const [user,setUser]=useState("");
+    const [loading,setLoading]=useState(false);
+    // const [leetUser,setLeetUser]=useState("");
+    // const [profile,setProfile]=useState([]);
+    // const fetchUserProfie=async(username)=>{
+
+    // }
     const fetchUserData=async()=>{
       const res=await fetch("http://localhost:4000/fetchUsers");
       const resBody=await res.json();
@@ -92,6 +98,12 @@ const App=()=>{
       for(const user of users){
         if(user["username"]===name.trim() && user["password"]===password.trim()){
           setUser(user);
+          console.log(user);
+          // setLeetUser(user["leetcodeUsername"]);
+          // const data=fetchUserProfie(user["leetcodeUsername"]);
+          // setProfile((state)=>{
+          //   return {...state, leetCode:data};
+          // })
           return true;
         }
       }
@@ -137,19 +149,31 @@ const App=()=>{
       return true;
     }
 
-    const addTofav=async(question)=>{
-      const newList=user["favorites"];
-      for(const fav of newList){
-        if(fav["link"]===question["link"]){
-          console.log("Not Added");
-          return;
+    const addTofav=async(question,flag)=>{
+      let newList=[];
+      if(flag===0){
+        const newList1=user["favorites"];
+        for(const fav of newList){
+          if(fav["link"]===question["link"]){
+            console.log("Not Added");
+            return;
+          }
         }
+        newList1.push(question);
+        newList=newList1;
       }
-      newList.push(question);
+      else{
+        const newList1=user["favorites"].filter((fav)=>{
+          return fav["link"]!==question["link"];
+        });
+        console.log(newList1);
+        newList=newList1;
+      }
       const data={};
       data.id=user["id"];
       data.favs=newList;
       console.log(data);
+      setLoading(true);
       const res=await fetch("http://localhost:4000/favs",{
         method:'POST',
         headers: {
@@ -158,7 +182,11 @@ const App=()=>{
         body:JSON.stringify(data)
       })
       const resBody=await res.json();
+      console.log("resBody");
+      console.log(resBody);
       setUsers(resBody["items"]);
+      setUser(resBody["user"]);
+      setLoading(false);
     }
 
     const reset=()=>{
@@ -173,14 +201,14 @@ const App=()=>{
           {index:true,path:'', element:<Home clickHandler={addTofav} items={fetchedQuestions} user={user} reset={reset}/>},
           {path:'login', element:<Login onSubmit={verify} user={user} reset={reset}/>},
           {path:'signUp', element:<SignUp onSubmit={addUser} user={user} reset={reset}/>},
-          {path:'favs', element:<Favorites items={user["favorites"]} user={user} reset={reset}/>},
+          {path:'favs', element:<Favorites items={user["favorites"]} user={user} reset={reset} clickHandler={addTofav}/>},
           {path:'contribute',element:<Add onSubmit={getQuestion} user={user} reset={reset}/>}
         ]
       }
       
     ]);
-
-    return <AppProvider><RouterProvider router={router}/></AppProvider>;
+    const show=(loading)? <p>Loading...</p>:<AppProvider><RouterProvider router={router}/></AppProvider>;
+    return (show);
 }
 
 export default App;

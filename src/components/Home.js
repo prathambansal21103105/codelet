@@ -38,7 +38,7 @@ const Home=({clickHandler,items,user,reset})=>{
       </div>
       </div>
       </div> */}
-      {topics.map((topic)=> <Tags clickHandler={clickHandler} topic={topic} user={user}/>)}
+      {topics.map((topic)=> <Tags clickHandler={clickHandler} topic={topic} user={user} flag={0}/>)}
       </main>
       </>
     );

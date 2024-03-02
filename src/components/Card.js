@@ -9,17 +9,23 @@ const Card=(props)=>{
     const addHandler=(event)=>{
         event.preventDefault();
         if(!clicked){
-            props.clickHandler(props.question);
+            props.clickHandler(props.question,props.flag);
         }
         setClicked((state)=>!state);
     }
     const openURL=()=>{
         window.open(props.question.link);
     }
+    let x='➕';
+    let y='➖';
+    if(props.flag===1){
+        x='➖';
+        y='➕';
+    }
     return(
         // <div className={classes.box}>
         <>
-            {props.user!=="" && <button className={classes.star} onClick={addHandler}>{(!clicked)? '➕':'➖'}</button>}
+            {props.user!=="" && <button className={classes.star} onClick={addHandler}>{(!clicked)? x:y}</button>}
             <button className={classes.question} onClick={openURL}>{props.question.title}</button>
         </>
         // {/* </div> */}

@@ -4,7 +4,7 @@
 import Navigation from "./Navigation";
 import Tags from "./Tags";
 
-const Favorites=({items,user,reset})=>{
+const Favorites=({items,user,reset,clickHandler})=>{
   // const ctx=useContext(AppContext);
   const topics=[];
   console.log(items);
@@ -30,7 +30,7 @@ const Favorites=({items,user,reset})=>{
       <Navigation user={user} reset={reset}/>
       <main>
       <p className="heading"> Welcome{" "+name} ! Here you can access your favorites</p>
-      {topics.map((topic)=> <Tags topic={topic}/>)}
+      {topics.map((topic)=> <Tags clickHandler={clickHandler} topic={topic} flag={1}/>)}
       </main>
       </>
     );

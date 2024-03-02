@@ -1,5 +1,5 @@
 import Card from "./Card";
-const Tags=({clickHandler,topic,user})=>{
+const Tags=({clickHandler,topic,user,flag})=>{
     console.log("topic");
     console.log(topic);
     const items=[];
@@ -12,7 +12,7 @@ const Tags=({clickHandler,topic,user})=>{
       <h2>{topic[0].tag}</h2>
       <div className="topic">
       <ul>
-      {items.map((element)=><li><Card key={element.id} id={element.id} clickHandler={clickHandler} question={element} user={user}/></li>)}
+      {items.map((element)=><li><Card key={element.id} id={element.id} clickHandler={clickHandler} question={element} user={user} flag={flag}/></li>)}
       </ul>
       </div>
       </div>
