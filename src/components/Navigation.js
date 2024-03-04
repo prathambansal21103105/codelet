@@ -25,11 +25,11 @@ const Navigation=({user,reset})=>{
                     <li>
                         <NavLink to="/" className={({isActive})=> isActive ? classes.active:undefined} id="nav" end>Home</NavLink>
                     </li>
-                    <li>
+                    {user!=="" &&<li>
                         <NavLink to="/favs" className={({isActive})=> isActive ? classes.active:undefined} id="nav" end>Favorites</NavLink>
-                    </li>
+                    </li>}
                     <li>
-                        <NavLink to="/Contribute" className={({isActive})=> isActive ? classes.active:undefined} id="nav" end>Contribute</NavLink>
+                        <NavLink to="/contribute" className={({isActive})=> isActive ? classes.active:undefined} id="nav" end>Contribute</NavLink>
                     </li>
                     <li>
                         <NavLink to="/login" className={({isActive})=> isActive ? classes.active:undefined} id="nav" onClick={clickHandler} end>{(user!=="")? 'Logout':'Login'}</NavLink>
@@ -37,7 +37,9 @@ const Navigation=({user,reset})=>{
                     <li>
                         <NavLink to="/signUp" className={({isActive})=> isActive ? classes.active:undefined} id="nav" end>Create an Account</NavLink>
                     </li>
-                    
+                    {user!=="" &&<li>
+                        <NavLink to="/profile" className={({isActive})=> isActive ? classes.active:undefined} id="nav" end>Profile</NavLink>
+                    </li>}
                 </ul>
             </nav>
         </header>

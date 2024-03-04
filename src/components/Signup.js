@@ -6,6 +6,8 @@ import Navigation from "./Navigation";
 const SignUp=(props)=>{
     const [name,setName]=useState("");
     const [password,setPassword]=useState("");
+    const [leetcode,setLeetcode]=useState("");
+    const [codeforces,setCodeforces]=useState("");
     const navigate=useNavigate();
     const nameInputHandler=(event)=>{
         setName(event.target.value);
@@ -13,11 +15,19 @@ const SignUp=(props)=>{
     const passwordInputHandler=(event)=>{
         setPassword(event.target.value);
     }
+    const leetcodeInputHandler=(event)=>{
+        setLeetcode(event.target.value);
+    }
+    const codeforcesInputHandler=(event)=>{
+        setCodeforces(event.target.value);
+    }
     const submitHandler=(event)=>{
         event.preventDefault();
-        if(props.onSubmit(name,password)){
+        if(props.onSubmit(name,password,leetcode,codeforces)){
             setName("");
             setPassword("");
+            setLeetcode("");
+            setCodeforces("");
             navigate('/login');
         }
     }
@@ -31,13 +41,25 @@ const SignUp=(props)=>{
          <div className={classes['input-group']}>
              <p>
              <label htmlFor="name">Username</label>
-             <input type="text" placeholder="username" value={name} onChange={nameInputHandler} id='name'/>
+             <input type="text" value={name} onChange={nameInputHandler} id='name'/>
              </p>
          </div>
          <div className={classes['input-group']}>
              <p>
              <label htmlFor="password">Password</label>
-             <input type="password" placeholder="password" value={password} onChange={passwordInputHandler} id='password'/>
+             <input type="password" value={password} onChange={passwordInputHandler} id='password'/>
+             </p>
+         </div>
+         <div className={classes['input-group']}>
+             <p>
+             <label htmlFor="name">Leetcode Handle</label>
+             <input type="text" value={leetcode} onChange={leetcodeInputHandler} id='name'/>
+             </p>
+         </div>
+         <div className={classes['input-group']}>
+         <p>
+             <label htmlFor="name">Codeforces Handle</label>
+             <input type="text" value={codeforces} onChange={codeforcesInputHandler} id='name'/>
              </p>
          </div>
          <p className={classes.action}>

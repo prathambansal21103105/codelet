@@ -6,6 +6,7 @@ import Favorites from './components/Favorites';
 import RootLayout from './components/RootLayout';
 import AppProvider from './store/AppProvider';
 import Add from './components/Add';
+import Profile from './components/Profile';
 import { createBrowserRouter,RouterProvider } from "react-router-dom";
 // import { useContext } from 'react';
 // import AppContext from './store/app-context';
@@ -16,11 +17,13 @@ const App=()=>{
     const [fetchedQuestions,setFetchedQuestions]=useState([]);
     const [user,setUser]=useState("");
     const [loading,setLoading]=useState(false);
-    const [leetUser,setLeetUser]=useState("");
+    const [leetData,setLeetData]=useState([]);
+    const [codeData,setCodeData]=useState([]);
     // const [profile,setProfile]=useState([]);
     const fetchUserProfie=async(username)=>{
       // const res=await fetch("https://leetcode-stats-api.herokuapp.com/"+username);
-      const data={username};
+      const data={"username":username};
+      console.log("username:",data);
       const res=await fetch("http://localhost:4000/fetchUserProfile",{
         method:"POST",
         headers:{
@@ -36,12 +39,12 @@ const App=()=>{
       const resBody=await res.json();
       const data=resBody.users;
       const usersList=[];
-      console.log("userData:");
-      console.log(data);
+      // console.log("userData:");
+      // console.log(data);
       for(const user in data){
         usersList.push(data[user]);
       }
-      console.log(usersList);
+      // console.log(usersList);
       setUsers(usersList);
     }
     const fetchQuestions=async()=>{
@@ -52,7 +55,7 @@ const App=()=>{
       for(const question in data){
         questionsList.push(data[question]);
       }
-      console.log(questionsList);
+      // console.log(questionsList);
       setFetchedQuestions(questionsList);
     }
     const getQuestion=async(question)=>{
@@ -64,7 +67,7 @@ const App=()=>{
         body:JSON.stringify(question)
       });
       const resData=await res.json();
-      console.log(resData);
+      // console.log(resData);
       const questionsList=[];
       for(const question in resData.questions){
         questionsList.push(resData.questions[question]);
@@ -107,10 +110,19 @@ const App=()=>{
       for(const user of users){
         if(user["username"]===name.trim() && user["password"]===password.trim()){
           setUser(user);
-          console.log(user);
-          setLeetUser(user["leetcodeUsername"]);
-          const data=await fetchUserProfie(user["leetcodeUsername"]);
+          // console.log(user);
+          const leetUser=user["leetcodeUsername"];
+          const cfUser=user["codeforcesUsername"];
+          console.log(leetUser,cfUser);
+          console.log(cfUser);
+          const data=await fetchUserProfie(leetUser);
+          const res=await fetch("https://codeforces.com/api/user.info?handles="+cfUser+"&checkHistoricHandles=false");
+          const resData=await res.json();
+          console.log(resData);
           console.log(data);
+          setLeetData(data);
+          setCodeData(resData);
+          
           // setProfile((state)=>{
           //   return {...state, leetCode:data};
           // })
@@ -135,8 +147,8 @@ const App=()=>{
     //   })
     //   return true;
     // }
-    const addUser=async(name,password)=>{
-      const data={"username":name.trim(),"password":password.trim(),"favorites":[]};
+    const addUser=async(name,password,leetcode,codeforces)=>{
+      const data={"username":name.trim(),"password":password.trim(),"favorites":[],"leetcodeUsername":leetcode.trim(),"codeforcesUsername":codeforces.trim()};
       const res=await fetch("http://localhost:4000/create",{
         method:'POST',
         headers: {
@@ -145,7 +157,7 @@ const App=()=>{
         body:JSON.stringify(data)
       })
       const resData=await res.json();
-      console.log(resData);
+      // console.log(resData);
       if(resData.msg){
         console.log("already exists!");
       }
@@ -212,7 +224,8 @@ const App=()=>{
           {path:'login', element:<Login onSubmit={verify} user={user} reset={reset}/>},
           {path:'signUp', element:<SignUp onSubmit={addUser} user={user} reset={reset}/>},
           {path:'favs', element:<Favorites items={user["favorites"]} user={user} reset={reset} clickHandler={addTofav}/>},
-          {path:'contribute',element:<Add onSubmit={getQuestion} user={user} reset={reset}/>}
+          {path:'contribute',element:<Add onSubmit={getQuestion} user={user} reset={reset}/>},
+          {path:'profile',element:<Profile user={user} reset={reset} leetData={leetData} codeData={codeData}/>}
         ]
       }
       
