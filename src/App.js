@@ -20,6 +20,7 @@ const App=()=>{
     // const [loading,setLoading]=useState(false);
     const [leetData,setLeetData]=useState([]);
     const [codeData,setCodeData]=useState([]);
+    const [cfData,setCfData]=useState([]);
     
     // const [profile,setProfile]=useState([]);
     const fetchUserProfie=async(username)=>{
@@ -113,18 +114,47 @@ const App=()=>{
         if(user["username"]===name.trim() && user["password"]===password.trim()){
           setUser(user);
           // console.log(user);
-          const leetUser=user["leetcodeUsername"];
-          const cfUser=user["codeforcesUsername"];
+          let leetUser=user["leetcodeUsername"];
+          let cfUser=user["codeforcesUsername"];
+          console.log(leetUser);
           console.log(leetUser,cfUser);
+          console.log(typeof leetUser);
+          console.log(typeof cfUser);
+          console.log(cfUser.length);
+          if(cfUser.charAt(0)==='"'){
+            cfUser=cfUser.slice(1,cfUser.length-1);
+          }
           console.log(cfUser);
           const data=await fetchUserProfie(leetUser);
+          let cfUrl="https://codeforces.com/api/user.info?handles="+cfUser+"&checkHistoricHandles=false";
+          console.log(cfUrl);
           const res=await fetch("https://codeforces.com/api/user.info?handles="+cfUser+"&checkHistoricHandles=false");
           const resData=await res.json();
+          let codeforcesUrl="https://codeforces.com/api/user.status?handle=";
+          codeforcesUrl=codeforcesUrl+cfUser;
+          console.log(codeforcesUrl);
+          const resQ=await fetch(codeforcesUrl);
+          const dataQ=await resQ.json();
+          let totalSubmissions=dataQ["result"].length;
+          let correctSubmissions=0;
+          let cfData={};
+          for(const question of dataQ["result"]){
+            if(question["verdict"]==="OK"){
+              correctSubmissions=correctSubmissions+1;
+              // console.log(question);
+              cfData[question["problem"]["name"]]=1;
+            }
+          }
+          let questionsSolved=Object.entries(cfData).length;
+          console.log(cfData);
+          console.log(questionsSolved);
+          console.log(correctSubmissions);
+          console.log(totalSubmissions);
           console.log(resData);
           console.log(data);
           setLeetData(data);
           setCodeData(resData);
-          
+          setCfData({questionsSolved,correctSubmissions,totalSubmissions});
           // setProfile((state)=>{
           //   return {...state, leetCode:data};
           // })
@@ -231,7 +261,7 @@ const App=()=>{
           {path:'signUp', element:<SignUp onSubmit={addUser} user={user} reset={reset}/>},
           {path:'favs', element:<Favorites items={user["favorites"]} user={user} reset={reset} clickHandler={addTofav}/>},
           {path:'contribute',element:<Add onSubmit={getQuestion} user={user} reset={reset}/>},
-          {path:'profile',element:<Profile user={user} reset={reset} leetData={leetData} codeData={codeData}/>},
+          {path:'profile',element:<Profile user={user} reset={reset} leetData={leetData} codeData={codeData} cfData={cfData}/>},
           {path:'loading',element:<Loading user={user} reset={reset}/>}
         ]
       }

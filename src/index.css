@@ -150,7 +150,7 @@ main{
   background: #171614;
   margin-top: 70px;
   padding: 30px;
-  height: max-content;
+  height: 204px;
   border-radius: 20px;
   /* padding-left: 20px; */
   width: 450px;
@@ -166,7 +166,7 @@ main{
   background: white;
   margin-top: 70px;
   padding: 30px;
-  height: max-content;
+  height: 204px;
   border-radius: 20px;
   /* padding-left: 20px; */
   width: 450px;
@@ -177,6 +177,8 @@ main{
   align-content: center;
   flex-wrap: wrap;
   flex-direction: row;
+  font-family: verdana, arial, sans-serif;
+  font-size: 14px;
 }
 
 .space{
@@ -272,4 +274,26 @@ main{
   padding-top: 18%;
   height: 100%;
   width:100%
+}
+
+.bolder{
+  font-weight: bolder;
+}
+
+.cfGreen{
+  color: #216E39;
+  display: block;
+  font-weight: bold;
+}
+
+.black{
+  color:black;
+  display: block;
+  font-weight: bold;
+}
+
+.cfRed{
+  color:goldenrod;
+  display: block;
+  font-weight: bold;
 }

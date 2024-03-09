@@ -1,6 +1,6 @@
 import Navigation from "./Navigation";
 
-const Profile=({user,reset,leetData,codeData})=>{
+const Profile=({user,reset,leetData,codeData,cfData})=>{
     console.log(user);
     console.log(leetData);
     const imgUrl=leetData["data"]["data"]["matchedUser"]["profile"]["userAvatar"];
@@ -16,7 +16,7 @@ const Profile=({user,reset,leetData,codeData})=>{
     const cfOrganization=codeData["result"]["0"]["organization"];
     const cfEmail=codeData["result"]["0"]["email"];
     const badges=leetData["data"]["data"]["matchedUser"]["badges"];
-    const photo=codeData["result"]["0"]["avatar"];
+    // const photo=codeData["result"]["0"]["avatar"];
     const rating=leetData["data"]["data"]["userContestRanking"]["rating"];
     console.log(typeof rating);
     console.log(badges);
@@ -75,6 +75,13 @@ const Profile=({user,reset,leetData,codeData})=>{
         <div className="space">
         <div className="cf">
             <img className="logo" src={cfLogo} alt="logo"/>
+            <div>
+            <span className={"black block"}>Contest Rating <span className="bolder">{cfRating}</span></span>
+            <span className="black"> Total Submissions <span className="bolder">{cfData["totalSubmissions"]}</span></span>
+            <span className="cfGreen"> Correct Submissions <span className="bolder">{cfData["correctSubmissions"]}</span></span>
+            <span className="cfRed">Problems Solved <span className="bolder">{cfData["questionsSolved"]}</span></span>
+            <span className={rank}> Contest Rank <span className="bolder">{rank}</span> </span>
+            </div>
         </div>
         </div>
         </div>
