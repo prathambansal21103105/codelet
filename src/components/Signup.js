@@ -63,7 +63,7 @@ const SignUp=(props)=>{
              </p>
          </div>
          <p className={classes.action}>
-             <button type="submit" className={classes.button}>SignUp</button>
+             <button type="submit" className={classes.button}>register</button>
          </p>
          </form>
          </main>

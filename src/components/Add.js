@@ -48,7 +48,7 @@ const Add=({onSubmit,user,reset})=>{
             </p>
         </div>
         <p className={classes.action}>
-            <button type="submit" className={classes.button}>Contribute</button>
+            <button type="submit" className={classes.button}>submit</button>
         </p>
         </form>
         </main>

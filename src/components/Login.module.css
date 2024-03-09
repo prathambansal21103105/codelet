@@ -3,8 +3,10 @@
     max-width: 25rem;
     margin: 2rem auto;
     border-radius: 4px;
-    background: linear-gradient(180deg, #f2f4f4, #eaeceb);
+    background: linear-gradient(180deg, #050505, #0b0c0b);
     color:black;
+    border: goldenrod;
+    border-style: dotted;
   }
   
   .input-group {
@@ -20,7 +22,7 @@
     font-size: 0.75rem;
     font-weight: bold;
     text-transform: uppercase;
-    color: #0b0c0c, !important;
+    color: white;
   }
   
   .form input {
@@ -28,8 +30,8 @@
     padding: 0.5rem;
     border: 1px solid #575858;
     border-radius: 0.25rem;
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
     font-size: 1rem;
     font-weight:bold;
   }
@@ -44,7 +46,7 @@
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 0.25rem;
-    background: linear-gradient(180deg, #1f1f1f, #030303);
+    background: rgb(83, 71, 8);
     color: #f0f9f7;
     font-family: 'Roboto Condensed', sans-serif;
     cursor: pointer;
@@ -59,7 +61,7 @@
   }
   
   button:hover {
-    background: linear-gradient(180deg, #4a4b4b00, #585858);
+    background: goldenrod !important;
     border: black;
     border-width: 1rem;
     color:black;
@@ -71,7 +73,7 @@
   }
 
   ::placeholder{
-    color:rgb(174, 174, 174)!important;
+    color:black;
     font-size: small;
     font-weight: bold;
   }

@@ -5,6 +5,8 @@
     border-radius: 4px;
     background: linear-gradient(180deg, #010202, #070707);
     color:black;
+    border: goldenrod;
+    border-style: dotted;
   }
   
   .input-group {
@@ -44,8 +46,8 @@
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 0.25rem;
-    background: linear-gradient(180deg, #fcfafa, #fefcfc);
-    color: #070707;
+    background: rgb(83, 71, 8);
+    color: white;
     font-family: 'Roboto Condensed', sans-serif;
     cursor: pointer;
   }

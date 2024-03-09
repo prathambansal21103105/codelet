@@ -9,7 +9,7 @@
   font-weight: 400;
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: black;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -111,7 +111,6 @@ main{
   align-content: center;
   flex-wrap: wrap;
   flex-direction: row;
-  /* background-color: black; */
 }
 
 .info{
@@ -119,6 +118,8 @@ main{
   margin-right:40px;
   text-align: auto;
   font-family: helvetica neue, Helvetica, Arial, sans-serif !important;
+  background-color: black;
+  padding: 20px;
 }
 
 
@@ -264,4 +265,11 @@ main{
 .rating{
   display: block;
   color:grey !important;
+}
+
+.loading{
+  text-align: center;
+  padding-top: 18%;
+  height: 100%;
+  width:100%
 }

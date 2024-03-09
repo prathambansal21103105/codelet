@@ -1,15 +1,22 @@
+import { useNavigate } from 'react-router-dom';
 import classes from './Card.module.css';
 import { useState } from 'react';
 // import { useState,useContext } from 'react';
 // import AppContext from '../store/app-context';
 
 const Card=(props)=>{
+    const navigate=useNavigate();
     const [clicked,setClicked]=useState(false);
     // const ctx=useContext(AppContext);
-    const addHandler=(event)=>{
+    const addHandler=async(event)=>{
         event.preventDefault();
         if(!clicked){
-            props.clickHandler(props.question,props.flag);
+            navigate("/loading");
+            let res='1';
+            res=await props.clickHandler(props.question,props.flag);
+            if(res===true || res===false){
+                navigate("/");
+            }
         }
         setClicked((state)=>!state);
     }

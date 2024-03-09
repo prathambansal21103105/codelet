@@ -6,6 +6,8 @@
     /* background: linear-gradient(180deg, #f2f4f4, rgb(21, 17, 9)); */
     background:black;
     /* color:black; */
+    border: goldenrod;
+    border-style: dotted;
   }
   
   .input-group {
@@ -46,8 +48,8 @@
     border: none;
     border-radius: 0.25rem;
     /* background: linear-gradient(180deg, #1f1f1f, #030303); */
-    background: white;
-    color: #000000;
+    background: rgb(83, 71, 8);
+    color: white;
     font-family: 'Roboto Condensed', sans-serif;
     cursor: pointer;
   }
@@ -73,7 +75,7 @@
   }
 
   ::placeholder{
-    color:rgb(7, 7, 7)!important;
+    color:white!important;
     font-size: small;
     font-weight: bold;
   }

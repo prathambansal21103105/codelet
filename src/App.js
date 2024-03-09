@@ -7,6 +7,7 @@ import RootLayout from './components/RootLayout';
 import AppProvider from './store/AppProvider';
 import Add from './components/Add';
 import Profile from './components/Profile';
+import Loading from './components/Loading';
 import { createBrowserRouter,RouterProvider } from "react-router-dom";
 // import { useContext } from 'react';
 // import AppContext from './store/app-context';
@@ -16,9 +17,10 @@ const App=()=>{
     const [users,setUsers]=useState([]);
     const [fetchedQuestions,setFetchedQuestions]=useState([]);
     const [user,setUser]=useState("");
-    const [loading,setLoading]=useState(false);
+    // const [loading,setLoading]=useState(false);
     const [leetData,setLeetData]=useState([]);
     const [codeData,setCodeData]=useState([]);
+    
     // const [profile,setProfile]=useState([]);
     const fetchUserProfie=async(username)=>{
       // const res=await fetch("https://leetcode-stats-api.herokuapp.com/"+username);
@@ -175,10 +177,13 @@ const App=()=>{
       let newList=[];
       if(flag===0){
         const newList1=user["favorites"];
-        for(const fav of newList){
+        console.log("question:",question);
+        console.log("newList1:",newList1);
+        for(const fav of newList1){
+          console.log("fav:",fav);
           if(fav["link"]===question["link"]){
-            console.log("Not Added");
-            return;
+            console.log("Not Added:");
+            return false;
           }
         }
         newList1.push(question);
@@ -195,7 +200,7 @@ const App=()=>{
       data.id=user["id"];
       data.favs=newList;
       console.log(data);
-      setLoading(true);
+      // setLoading(true);
       const res=await fetch("http://localhost:4000/favs",{
         method:'POST',
         headers: {
@@ -208,7 +213,8 @@ const App=()=>{
       console.log(resBody);
       setUsers(resBody["items"]);
       setUser(resBody["user"]);
-      setLoading(false);
+      // setLoading(false);
+      return true;
     }
 
     const reset=()=>{
@@ -225,13 +231,14 @@ const App=()=>{
           {path:'signUp', element:<SignUp onSubmit={addUser} user={user} reset={reset}/>},
           {path:'favs', element:<Favorites items={user["favorites"]} user={user} reset={reset} clickHandler={addTofav}/>},
           {path:'contribute',element:<Add onSubmit={getQuestion} user={user} reset={reset}/>},
-          {path:'profile',element:<Profile user={user} reset={reset} leetData={leetData} codeData={codeData}/>}
+          {path:'profile',element:<Profile user={user} reset={reset} leetData={leetData} codeData={codeData}/>},
+          {path:'loading',element:<Loading user={user} reset={reset}/>}
         ]
       }
       
     ]);
-    const show=(loading)? <p>Loading...</p>:<AppProvider><RouterProvider router={router}/></AppProvider>;
-    return (show);
+
+    return <AppProvider><RouterProvider router={router}/></AppProvider>;
 }
 
 export default App;
